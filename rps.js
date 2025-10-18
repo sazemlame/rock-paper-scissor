@@ -1,4 +1,4 @@
-function getComputerChoice(min,max) {
+function getComputerChoice(min,max) {                 //getting the computer's input
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
     let random = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
@@ -14,7 +14,7 @@ function getComputerChoice(min,max) {
 
 }
 //console.log(getComputerChoice(0,3));
-function getHumanChoice(){
+function getHumanChoice(){     // getting the human input
     let choice = prompt ("Enter an input between rock,paper and scissor");
     final_choice = choice.at(0).toUpperCase()+choice.slice(1).toLowerCase();
     return final_choice;
@@ -22,7 +22,7 @@ function getHumanChoice(){
 }
 //getHumanChoice();
 
-let humanScore = 0;
+let humanScore = 0;               // initialising the global score
 let computerScore = 0;
 
 function playRound(humanChoice,computerChoice){
@@ -46,8 +46,8 @@ function playRound(humanChoice,computerChoice){
 const rounds=5;
 function playGame(rounds)
 {
-    let i=0;
-    for (i=0;i<rounds;i++){
+    let round=0;
+    for (round=0;i<rounds;round++){
         humanSelection=getHumanChoice();
         computerSelection=getComputerChoice(0,3);
         playRound(humanSelection,computerSelection);
