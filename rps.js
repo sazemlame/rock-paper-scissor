@@ -21,7 +21,9 @@ function getHumanChoice(){     // getting the human input
         button.addEventListener("click", () => {
             let choice = button.textContent;
             //console.log(choice);
-            playRound(choice,getComputerChoice(0,3)); //initiating round when button pressed
+            playRound(choice,getComputerChoice(0,3)); 
+
+  
             
             
 
@@ -31,9 +33,10 @@ function getHumanChoice(){     // getting the human input
     
     
 }
-getHumanChoice();
+
 let humanScore = 0;               // initialising the global score
 let computerScore = 0;
+
 const container = document.querySelector("#container");
 const div = document.createElement("div");
 div.style.background = "grey";
@@ -41,34 +44,56 @@ const h2 = document.createElement("h2");
 const human= document.createElement("p");
 const computer = document.createElement("p");
 h2.textContent = "Score Table";
-human.textContent = "Human Score : ";
-computer.textContent = "Computer Score : "
-
+function renderScores(){
+    human.textContent = `Human Score : ${humanScore}`;
+    computer.textContent = `Computer Score: ${computerScore}`;
+}
+renderScores();
 div.append(h2);
 div.append(human);
 div.append(computer);
 container.appendChild(div);
 
+let round =1;
 function playRound(humanChoice,computerChoice){
-    
-    
-    console.log("The choices are ", humanChoice, computerChoice)
+
+ 
+//logic to run rounds and update scores
+    const line = document.createElement("p");
+    line.textContent = `R${round++} :The choices are ${humanChoice} and ${computerChoice}`;
+    container.appendChild(line);
+    if(humanScore>=5 || computerScore>=5){
+        const winner = humanScore>=5?'Human':'Computer';
+        const msg = document.createElement("h3");
+        msg.textContent = `${winner} wins`;
+        div.appendChild(msg);
+
+        document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+    }
     if(humanChoice===computerChoice){
-        
+    
     }
     if(humanChoice==="Rock" && computerChoice==="Scissor" || humanChoice === "Paper" && computerChoice === "Rock" || humanChoice === "Scissor" && computerChoice === "Paper"){
         humanScore++;
-        console.log("Human wins");
+        renderScores();
 
     }
     if(humanChoice==="Scissor" && computerChoice==="Rock" || humanChoice === "Rock" && computerChoice === "Paper" || humanChoice === "Paper" && computerChoice === "Scissor"){
         computerScore++;
-        console.log("Computer wins");
+        renderScores();
+
+    
     }
+
+        
+    
     
 
 
 }
+getHumanChoice();
+
+
 
 /**const rounds=5;
 function playGame(rounds)
